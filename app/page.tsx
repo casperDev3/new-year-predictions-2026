@@ -170,9 +170,11 @@ export default function Home() {
             </motion.div>
 
             {/* Chest Section */}
-            <div className="relative w-full max-w-4xl flex flex-col items-center justify-center z-10">
+            <div style={{
+              paddingTop: '20px',
+            }} className="relative w-full max-w-4xl flex flex-col items-center justify-center z-10">
               <motion.div 
-                className="mb-10 md:mb-12 text-center text-white text-xl md:text-2xl font-bold px-8 py-4 bg-white/10 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-lg max-w-2xl"
+                className="mb-10 md:mb-12 text-center text-white text-xl md:text-2xl font-bold px-8 py-8 bg-white/10 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-lg max-w-2xl"
                 animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               >
@@ -188,27 +190,13 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, type: 'spring' }}
-            className="w-full flex flex-col items-center min-h-screen justify-center py-8"
+            className="w-full flex flex-col items-center justify-center min-h-screen py-8 md:py-12 px-4"
           >
-            {/* Back Button */}
-            <motion.button
-              onClick={handleReset}
-              className="fixed top-6 left-6 z-50 flex items-center gap-2 px-6 py-3 bg-white/90 hover:bg-white text-red-600 font-bold rounded-full shadow-xl transition-all active:scale-95 hover:shadow-2xl border-2 border-red-600/20 backdrop-blur-sm"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              style={{ 
-                fontFamily: 'Arial, sans-serif',
-                fontSize: '1rem',
-                letterSpacing: '0.03em'
-              }}
-            >
-              <ArrowLeft className="w-5 h-5" />
-              НАЗАД
-            </motion.button>
-
             {/* Phone Mockup with Prediction */}
-            <div className="flex-1 flex items-center justify-center w-full px-4">
+           <div style={{
+            padding: '60px'
+           }}>
+             <div className="mb-6 md:mb-8">
               <PhoneMockup 
                 ref={cardRef} 
                 prediction={prediction.text} 
@@ -216,40 +204,41 @@ export default function Home() {
                 mockupStyle={mockupStyle}
               />
             </div>
+           </div>
 
             {/* Mockup Style Selector */}
             <motion.div
-              className="flex gap-4 mb-6 px-4"
+              className="flex flex-wrap gap-5 md:gap-3 justify-center mb-4 md:mb-5 mt-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
             >
               <button
                 onClick={() => setMockupStyle('modern')}
-                className={`px-6 py-3 rounded-full font-bold transition-all ${
+                className={`px-4 md:px-5 py-2 md:py-2.5 rounded-lg font-semibold text-xs md:text-sm transition-colors ${
                   mockupStyle === 'modern'
-                    ? 'bg-purple-600 text-white scale-110 shadow-xl'
-                    : 'bg-white/80 text-purple-600 hover:bg-white'
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-white text-purple-600 hover:bg-purple-50'
                 }`}
               >
                 Сучасний
               </button>
               <button
                 onClick={() => setMockupStyle('classic')}
-                className={`px-6 py-3 rounded-full font-bold transition-all ${
+                className={`px-4 md:px-5 py-2 md:py-2.5 rounded-lg font-semibold text-xs md:text-sm transition-colors ${
                   mockupStyle === 'classic'
-                    ? 'bg-red-600 text-white scale-110 shadow-xl'
-                    : 'bg-white/80 text-red-600 hover:bg-white'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-white text-red-600 hover:bg-red-50'
                 }`}
               >
                 Класичний
               </button>
               <button
                 onClick={() => setMockupStyle('gradient')}
-                className={`px-6 py-3 rounded-full font-bold transition-all ${
+                className={`px-4 md:px-5 py-2 md:py-2.5 rounded-lg font-semibold text-xs md:text-sm transition-colors ${
                   mockupStyle === 'gradient'
-                    ? 'bg-pink-600 text-white scale-110 shadow-xl'
-                    : 'bg-white/80 text-pink-600 hover:bg-white'
+                    ? 'bg-pink-600 text-white'
+                    : 'bg-white text-pink-600 hover:bg-pink-50'
                 }`}
               >
                 Градієнт
@@ -258,51 +247,37 @@ export default function Home() {
 
             {/* Action Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 mt-8 mb-8 px-4"
+              className="flex flex-wrap gap-2 md:gap-3 justify-center pb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.5 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
             >
               <button
-                onClick={handleDownload}
-                className="flex items-center justify-center gap-3 px-10 py-4 bg-white hover:bg-gray-100 text-red-600 font-black rounded-full shadow-xl transition-all active:scale-95 hover:shadow-2xl border-2 border-white"
-                style={{ 
-                  fontFamily: 'Arial, sans-serif',
-                  fontSize: '1.125rem',
-                  letterSpacing: '0.05em',
-                  minWidth: '200px'
-                }}
+                onClick={handleReset}
+                className="flex items-center gap-1.5 md:gap-2 px-4 md:px-5 py-2 md:py-2.5 bg-white text-gray-700 font-semibold text-xs md:text-sm rounded-lg hover:bg-gray-50 transition-colors"
               >
-                <Download className="w-5 h-5" />
-                ЗБЕРЕГТИ
+                <ArrowLeft className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                Назад
+              </button>
+              <button
+                onClick={handleDownload}
+                className="flex items-center gap-1.5 md:gap-2 px-4 md:px-5 py-2 md:py-2.5 bg-green-600 text-white font-semibold text-xs md:text-sm rounded-lg hover:bg-green-700 transition-colors"
+              >
+                <Download className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                Зберегти
               </button>
               <button
                 onClick={handleReset}
-                className="flex items-center justify-center gap-3 px-10 py-4 bg-red-600 hover:bg-red-700 text-white font-black rounded-full shadow-xl transition-all active:scale-95 hover:shadow-2xl border-2 border-white/20"
-                style={{ 
-                  fontFamily: 'Arial, sans-serif',
-                  fontSize: '1.125rem',
-                  letterSpacing: '0.05em',
-                  minWidth: '200px'
-                }}
+                className="flex items-center gap-1.5 md:gap-2 px-4 md:px-5 py-2 md:py-2.5 bg-red-600 text-white font-semibold text-xs md:text-sm rounded-lg hover:bg-red-700 transition-colors"
               >
-                <RefreshCw className="w-5 h-5" />
-                ЩЕ РАЗ
+                <RefreshCw className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                Ще раз
               </button>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Footer - Coca-Cola style */}
-      <motion.div 
-        className="fixed bottom-6 text-sm md:text-base text-white/80 z-10 font-bold tracking-wide text-center px-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-      >
-        🎉 Новий Рік 2026 | Зроблено з любов'ю ❤️
-      </motion.div>
 
       {/* Decorative stars */}
       <div className="fixed top-10 left-10 text-white/20 text-4xl z-0 sparkle">✨</div>
